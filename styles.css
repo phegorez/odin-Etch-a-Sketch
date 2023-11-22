@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+.grid {
+    width: 37.5rem;
+    height: 37.5rem;
+    margin: auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: grid;
+}
+
+.grid-element {
+    border: 1px solid black;
+}
