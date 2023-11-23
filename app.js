@@ -1,6 +1,6 @@
 // Include parent grid container
 const grid = document.getElementById('grid')
-// Include sizeSlider
+// Include config elements
 const sizeSlider = document.getElementById('sizeSlider')
 const sizeSlider_display = document.getElementById('sizeSlider-display')
 const erase_btn = document.getElementById('erase-btn')
