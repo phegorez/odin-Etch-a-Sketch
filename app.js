@@ -4,10 +4,12 @@ const grid = document.getElementById('grid')
 const sizeSlider = document.getElementById('sizeSlider')
 const sizeSlider_display = document.getElementById('sizeSlider-display')
 const erase_btn = document.getElementById('erase-btn')
+const gridLine_btn = document.getElementById('gridLine-btn')
 
 // Event Management State
 let isDrawing = false
 let isErase = false
+let isGridEnable = false
 
 // Handle on Click & MouseOver
 const handleGridEvent = (event) => {
@@ -51,7 +53,13 @@ const addEvents = (grid_element) => {
 erase_btn.addEventListener('click', () => {
     const erase_display = document.getElementById('erase-display')
     isErase = !isErase
-    erase_display.innerText = isErase ? 'Eraser : On' : 'Eraser : off'
+    erase_display.innerText = isErase ? 'Eraser : On' : 'Eraser : Off'
+})
+
+gridLine_btn.addEventListener('click', () => {
+    const gridLine_display = document.getElementById('gridLine-display')
+    isGridEnable = !isGridEnable
+    gridLine_display.innerText = isGridEnable ? 'Grid Line : On' : 'Grid Line : Off'
 })
 // Event Management State
 
@@ -123,7 +131,7 @@ const draw = (event) => {
     // Handle all event on trigged target is pass to event managment
     const grid_element = event.target;
     // If target is 'grid-element'
-    if (grid_element.classList.contains('grid-element') ) {
+    if (grid_element.classList.contains('grid-element')) {
         // Change the color of the grid element when drawing
         grid_element.style.backgroundColor = isErase ? '' : 'black';
     }
