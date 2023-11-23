@@ -3,9 +3,11 @@ const grid = document.getElementById('grid')
 // Include sizeSlider
 const sizeSlider = document.getElementById('sizeSlider')
 const sizeSlider_display = document.getElementById('sizeSlider-display')
+const erase_btn = document.getElementById('erase-btn')
 
 // Event Management State
 let isDrawing = false
+let isErase = false
 
 // Handle on Click & MouseOver
 const handleGridEvent = (event) => {
@@ -45,6 +47,12 @@ const addEvents = (grid_element) => {
     grid_element.addEventListener('mousemove', handleMouseMove);
     grid_element.addEventListener('mouseup', handleMouseUp);
 };
+
+erase_btn.addEventListener('click', () => {
+    const erase_display = document.getElementById('erase-display')
+    isErase = !isErase
+    erase_display.innerText = isErase ? 'Eraser : On' : 'Eraser : off'
+})
 // Event Management State
 
 
@@ -115,9 +123,9 @@ const draw = (event) => {
     // Handle all event on trigged target is pass to event managment
     const grid_element = event.target;
     // If target is 'grid-element'
-    if (grid_element.classList.contains('grid-element')) {
+    if (grid_element.classList.contains('grid-element') ) {
         // Change the color of the grid element when drawing
-        grid_element.style.backgroundColor = 'black';
+        grid_element.style.backgroundColor = isErase ? '' : 'black';
     }
 }
 
