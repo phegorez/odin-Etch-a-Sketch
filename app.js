@@ -8,12 +8,15 @@ const gridLine_btn = document.getElementById('gridLine-btn')
 const gridLine_display = document.getElementById('gridLine-display')
 const clear_btn = document.getElementById('clear-btn')
 
-// Event Management State
+// Control Boolean
 let isDrawing = false
 let isErase = false
 let isGridLineToggle = false
 let isClear = false
 let isRandomColor = false
+
+// Event Management State
+
 
 // Handle on Click & MouseOver
 const handleGridEvent = (event) => {
