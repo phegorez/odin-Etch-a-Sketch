@@ -161,6 +161,7 @@ const draw = (event) => {
 }
 
 const clearDraw = () => {
+    // Include all element contains class grid-element
     const grid_elements = document.querySelectorAll('.grid-element')
     grid_elements.forEach((gridChild) => {
         gridChild.style.backgroundColor = ''
