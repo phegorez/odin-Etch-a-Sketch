@@ -17,6 +17,6 @@
     display: grid;
 }
 
-.grid-element {
+.grid-border {
     border: 1px solid black;
 }
