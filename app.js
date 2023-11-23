@@ -33,6 +33,11 @@ const handleMouseUp = () => {
     isDrawing = false;
 }
 
+// When mouse leave grid container set toggle off draw function by set isDrawing to false
+grid.addEventListener('mouseleave', () => {
+    isDrawing = false
+});
+
 const addEvents = (grid_element) => {
     grid_element.addEventListener('mouseover', handleGridEvent);
     grid_element.addEventListener('click', handleGridEvent);
