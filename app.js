@@ -7,14 +7,22 @@ const erase_btn = document.getElementById('erase-btn')
 const gridLine_btn = document.getElementById('gridLine-btn')
 const gridLine_display = document.getElementById('gridLine-display')
 const clear_btn = document.getElementById('clear-btn')
+const rainbowBush_btn = document.getElementById('rainbowBush-btn')
+const rainbowBush_display = document.getElementById('rainbowBush-display')
 
 // Control Boolean
 let isDrawing = false
 let isErase = false
 let isGridLineToggle = false
 let isClear = false
-let isRandomColor = false
+let isRainbowBush = false
 
+
+// Random color
+const randomColor = () => {
+    let hexColor = Math.floor(Math.random() * 16777215).toString(16)
+    return hexColor
+}
 // Event Management State
 
 
@@ -61,6 +69,11 @@ clear_btn.addEventListener('click', () => {
     clearDraw()
 })
 
+rainbowBush_btn.addEventListener('click', () => {
+    isRainbowBush = !isRainbowBush
+    rainbowBush_display.innerText = isRainbowBush ? 'Rainbow Bush : On' : 'Rainbow Bush : Off'
+})
+
 // When mouse leave grid container set toggle off draw function by set isDrawing to false
 grid.addEventListener('mouseleave', () => {
     isDrawing = false
@@ -78,12 +91,6 @@ erase_btn.addEventListener('click', () => {
     const erase_display = document.getElementById('erase-display')
     isErase = !isErase
     erase_display.innerText = isErase ? 'Eraser : On' : 'Eraser : Off'
-})
-
-gridLine_btn.addEventListener('click', () => {
-    const gridLine_display = document.getElementById('gridLine-display')
-    isGridEnable = !isGridEnable
-    gridLine_display.innerText = isGridEnable ? 'Grid Line : On' : 'Grid Line : Off'
 })
 // Event Management State
 
@@ -165,9 +172,19 @@ const draw = (event) => {
     // If target is 'grid-element'
     if (grid_element.classList.contains('grid-element')) {
         // Change the color of the grid element when drawing
-        grid_element.style.backgroundColor = isErase ? '' : 'black';
+        if(isRainbowBush) {
+            grid_element.style.backgroundColor =`#${randomColor()}`
+        }
+        else if(isErase) {
+            grid_element.style.backgroundColor = '';
+        }
+        else {
+            grid_element.style.backgroundColor = 'black'
+        }
+        
     }
 }
+
 
 const clearDraw = () => {
     // Include all element contains class grid-element
