@@ -1,15 +1,22 @@
 // Include parent grid container
 const grid = document.getElementById('grid')
-// Include sizeSlider
+// Include config elements
 const sizeSlider = document.getElementById('sizeSlider')
 const sizeSlider_display = document.getElementById('sizeSlider-display')
 const erase_btn = document.getElementById('erase-btn')
 const gridLine_btn = document.getElementById('gridLine-btn')
+const gridLine_display = document.getElementById('gridLine-display')
+const clear_btn = document.getElementById('clear-btn')
 
-// Event Management State
+// Control Boolean
 let isDrawing = false
 let isErase = false
-let isGridEnable = false
+let isGridLineToggle = false
+let isClear = false
+let isRandomColor = false
+
+// Event Management State
+
 
 // Handle on Click & MouseOver
 const handleGridEvent = (event) => {
@@ -36,6 +43,23 @@ const handleMouseMove = (event) => {
 const handleMouseUp = () => {
     isDrawing = false;
 }
+
+gridLine_btn.addEventListener('click', () => {
+    isGridLineToggle = !isGridLineToggle
+    gridLine_display.innerText = isGridLineToggle ? 'Grid Line : On' : 'Grid Line : Off'
+    // add grid-border to grid element
+    // Need grid_element from gridSizing functuin
+    const gridElements = document.querySelectorAll('.grid-element');
+    gridElements.forEach(gridChild => {
+        gridChild.classList.toggle('grid-border', isGridLineToggle);
+    });
+})
+
+clear_btn.addEventListener('click', () => {
+    isClear = true
+    // Clear draw function
+    clearDraw()
+})
 
 // When mouse leave grid container set toggle off draw function by set isDrawing to false
 grid.addEventListener('mouseleave', () => {
@@ -96,6 +120,10 @@ const gridSizing = (inputGridX2, inputGrid) => {
             const grid_element = document.createElement('div');
             // Add class 'grid-element'
             grid_element.classList.add('grid-element');
+            // Add 'grid-border' class based on the default value of isGridLineToggle
+            if (isGridLineToggle) {
+                grid_element.classList.add('grid-border');
+            }
             // Put all grid-element to grid parent
             grid.appendChild(grid_element);
             // Change gridTemplateColumns on Grid parent via input from user
@@ -114,6 +142,10 @@ const gridSizing = (inputGridX2, inputGrid) => {
             const grid_element = document.createElement('div');
             // Add class 'grid-element'
             grid_element.classList.add('grid-element');
+            // Add 'grid-border' class based on the default value of isGridLineToggle
+            if (isGridLineToggle) {
+                grid_element.classList.add('grid-border');
+            }
             // Put all grid-element to grid parent
             grid.appendChild(grid_element);
             // Change gridTemplateColumns on Grid parent = 16 becuase is a default size
@@ -135,6 +167,14 @@ const draw = (event) => {
         // Change the color of the grid element when drawing
         grid_element.style.backgroundColor = isErase ? '' : 'black';
     }
+}
+
+const clearDraw = () => {
+    // Include all element contains class grid-element
+    const grid_elements = document.querySelectorAll('.grid-element')
+    grid_elements.forEach((gridChild) => {
+        gridChild.style.backgroundColor = ''
+    })
 }
 
 // Clear Grid functuion
