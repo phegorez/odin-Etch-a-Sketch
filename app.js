@@ -9,6 +9,8 @@ const gridLine_display = document.getElementById('gridLine-display')
 const clear_btn = document.getElementById('clear-btn')
 const rainbowBush_btn = document.getElementById('rainbowBush-btn')
 const rainbowBush_display = document.getElementById('rainbowBush-display')
+const color_picker = document.getElementById('color-picker')
+const custom_hex = document.getElementById('custom-hex')
 
 // Control Boolean
 let isDrawing = false
@@ -23,6 +25,10 @@ const randomColor = () => {
     let hexColor = Math.floor(Math.random() * 16777215).toString(16)
     return hexColor
 }
+
+let currentColor = '#000000'
+
+
 // Event Management State
 
 
@@ -74,6 +80,23 @@ rainbowBush_btn.addEventListener('click', () => {
     rainbowBush_display.innerText = isRainbowBush ? 'Rainbow Bush : On' : 'Rainbow Bush : Off'
 })
 
+// Wait for debug
+color_picker.addEventListener('change', () => {
+    let selectionColor = color_picker.value;
+    currentColor = selectionColor
+})
+
+custom_hex.value = color_picker.value
+custom_hex.addEventListener('change', () => {
+    let selectionColor = color_picker.value;
+    selectionColor = custom_hex.value
+    currentColor = selectionColor
+    selectionColor = custom_hex.value
+})
+// Wait for debug
+
+// Draw Function
+
 // When mouse leave grid container set toggle off draw function by set isDrawing to false
 grid.addEventListener('mouseleave', () => {
     isDrawing = false
@@ -90,6 +113,7 @@ const addEvents = (grid_element) => {
 erase_btn.addEventListener('click', () => {
     const erase_display = document.getElementById('erase-display')
     isErase = !isErase
+    isRainbowBush = !isRainbowBush
     erase_display.innerText = isErase ? 'Eraser : On' : 'Eraser : Off'
 })
 // Event Management State
@@ -179,7 +203,7 @@ const draw = (event) => {
             grid_element.style.backgroundColor = '';
         }
         else {
-            grid_element.style.backgroundColor = 'black'
+            grid_element.style.backgroundColor = currentColor
         }
         
     }
