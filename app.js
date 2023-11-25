@@ -19,14 +19,30 @@ let isGridLineToggle = false
 let isClear = false
 let isRainbowBush = false
 
+// Color function
+let currentColor = color_picker.value
+color_picker.addEventListener('input', () => {
+    let hexValue = color_picker.value
+    isRainbowBush = false
+    displayRainbowBush()
+    currentColor = hexValue
+    custom_hex.value = hexValue
+})
 
+custom_hex.addEventListener('input', () => {
+    let hexValue = custom_hex.value
+    isRainbowBush = false
+    displayRainbowBush()
+    currentColor = hexValue
+    color_picker.value = hexValue
+})
 // Random color
 const randomColor = () => {
     let hexColor = Math.floor(Math.random() * 16777215).toString(16)
     return hexColor
 }
+//
 
-let currentColor = '#000000'
 
 
 // Event Management State
@@ -77,22 +93,15 @@ clear_btn.addEventListener('click', () => {
 
 rainbowBush_btn.addEventListener('click', () => {
     isRainbowBush = !isRainbowBush
-    rainbowBush_display.innerText = isRainbowBush ? 'Rainbow Bush : On' : 'Rainbow Bush : Off'
+    displayRainbowBush()
 })
+
+const displayRainbowBush = () => {
+    return rainbowBush_display.innerText = isRainbowBush ? 'Rainbow Bush : On' : 'Rainbow Bush : Off'
+}
 
 // Wait for debug
-color_picker.addEventListener('change', () => {
-    let selectionColor = color_picker.value;
-    currentColor = selectionColor
-})
 
-custom_hex.value = color_picker.value
-custom_hex.addEventListener('change', () => {
-    let selectionColor = color_picker.value;
-    selectionColor = custom_hex.value
-    currentColor = selectionColor
-    selectionColor = custom_hex.value
-})
 // Wait for debug
 
 // Draw Function
@@ -113,7 +122,7 @@ const addEvents = (grid_element) => {
 erase_btn.addEventListener('click', () => {
     const erase_display = document.getElementById('erase-display')
     isErase = !isErase
-    isRainbowBush = !isRainbowBush
+    isRainbowBush = false
     erase_display.innerText = isErase ? 'Eraser : On' : 'Eraser : Off'
 })
 // Event Management State
@@ -196,16 +205,16 @@ const draw = (event) => {
     // If target is 'grid-element'
     if (grid_element.classList.contains('grid-element')) {
         // Change the color of the grid element when drawing
-        if(isRainbowBush) {
-            grid_element.style.backgroundColor =`#${randomColor()}`
+        if (isRainbowBush) {
+            grid_element.style.backgroundColor = `#${randomColor()}`
         }
-        else if(isErase) {
+        else if (isErase) {
             grid_element.style.backgroundColor = '';
         }
         else {
             grid_element.style.backgroundColor = currentColor
         }
-        
+
     }
 }
 
